@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Automotive</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gallery-card {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .gallery-card:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        .gallery-image {
+            width: 100%;
+            height: 300px; /* Fixed height for consistent grid look */
+            object-fit: cover;
+        }
+        .soft-btn {
+            background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border: 1px solid #444444; 
+            color: #ffffff;
+            font-weight: 600;
+        }
+        /* LIGHTBOX STYLES */
+        #lightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 9999; /* Ensure it's on top */
+            padding-top: 50px; /* Location of the box (distance from the top) */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.95); /* Dark background with high opacity */
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #lightbox-content {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain; /* Ensure the image fits within the bounds */
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="w-full p-6 flex justify-center sticky top-0 bg-gray-900/90 z-10 backdrop-blur-sm shadow-xl">
+        <div class="max-w-7xl w-full flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-white tracking-wider">Automotive Photography</h1>
+            <a href="project.html" class="px-6 py-2 soft-btn rounded-full text-sm">
+                ← Back to Projects
+            </a>
+        </div>
+    </header>
+
+    <main class="flex flex-col items-center p-6 pt-12">
+        <p class="text-gray-400 text-xl max-w-7xl w-full mb-12">
+            “Capturing machines in their most alive moments — speed, style, and pure emotion.”
+        </p>
+        
+
+        <!-- Gallery Grid (12 Images Minimum) -->
+        <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <!-- Ensure each img has a data-src attribute for full path -->
+            <div class="gallery-card"><img src="./assets/IMG_6451 (1).jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 1" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6505.jpg" data-full-src="./assets/IMG_6505.jpg" alt="Automotive Image 2" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6433 (1).jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 3" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6256.jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 4" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6375 (1).jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 5" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/20250423_234107.jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 6" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6439.jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 7" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6297.jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 8" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6323 (1).jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 9" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6243.jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 10" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6276.jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 11" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_6406 (1).jpg" data-full-src="./assets/IMG_6451 (1).jpg" alt="Automotive Image 12" class="gallery-image"></div>
+            
+        </div>
+        <br>
+        <br>
+
+         <div class="mt-16 text-center max-w-2xl fadeUp" style="animation-delay: 1.0s;">
+            <p class="text-xl text-gray-300 mb-4">
+                Want to see more?
+            </p>
+            <!-- Note: You will need to replace the '#' with your actual contact section link in index.html -->
+            <a href="https://www.instagram.com/framesof.nathh/?hl=en" class="px-8 py-3 soft-btn rounded-full">
+                Get In Touch
+            </a>
+        </div>
+    </main>
+
+    <footer class="text-center text-gray-600 p-4 mt-12">
+        &copy; @framesof.nathh
+    </footer>
+
+    <!-- The Lightbox Modal -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <!-- Image element to display the full-size image -->
+        <img class="max-w-full max-h-full block m-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" 
+             id="lightbox-content" 
+             alt="Enlarged Automotive Image">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxContent = document.getElementById('lightbox-content');
+
+            // Function to open the lightbox
+            const openLightbox = (imageSrc, altText) => {
+                lightboxContent.src = imageSrc;
+                lightboxContent.alt = altText;
+                lightbox.style.display = 'block';
+            };
+
+            // Function to close the lightbox
+            window.closeLightbox = () => {
+                lightbox.style.display = 'none';
+                // Reset image src to prevent memory issues or weird flashing
+                lightboxContent.src = '';
+            };
+
+            // Add click listener to each gallery image
+            galleryImages.forEach(img => {
+                img.parentElement.addEventListener('click', (event) => {
+                    // Prevent closing if clicking the image itself while inside the gallery-card
+                    if (event.target.classList.contains('gallery-image')) {
+                        const fullSrc = img.getAttribute('data-full-src') || img.src;
+                        openLightbox(fullSrc, img.alt);
+                    }
+                });
+            });
+
+            // Close lightbox when the user presses the ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape" && lightbox.style.display === 'block') {
+                    closeLightbox();
+                }
+            });
+            
+            // Note on data-full-src: In a real environment, you would use data-full-src 
+            // to store the path to the high-resolution image, while 'src' holds the thumbnail path.
+            // Since all your images currently use the same local path for both, we mirror the src to data-full-src.
+        });
+    </script>
+
+</body>
+</html>

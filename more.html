@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | More</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gallery-card {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .gallery-card:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        .gallery-image {
+            width: 100%;
+            height: 300px; /* Fixed height for consistent grid look */
+            object-fit: cover;
+        }
+        .soft-btn {
+            background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border: 1px solid #444444; 
+            color: #ffffff;
+            font-weight: 600;
+        }
+        /* LIGHTBOX STYLES */
+        #lightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 9999; /* Ensure it's on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95); /* Dark background with high opacity */
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* The image container ensures the full image is centered and constrained */
+        #lightbox-content-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            /* Remove overflow: auto from the original #lightbox and place it here */
+            overflow: auto; 
+        }
+        #lightbox-content {
+            display: block;
+            max-width: 90vw; /* Scales up to 90% of viewport width */
+            max-height: 90vh; /* Scales up to 90% of viewport height */
+            object-fit: contain; /* Ensures the image fits within the bounds without cropping */
+            margin: auto;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="w-full p-6 flex justify-center sticky top-0 bg-gray-900/90 z-10 backdrop-blur-sm shadow-xl">
+        <div class="max-w-7xl w-full flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-white tracking-wider">Advyka</h1>
+            <a href="project.html" class="px-6 py-2 soft-btn rounded-full text-sm">
+                ← Back to Projects
+            </a>
+        </div>
+    </header>
+
+    <main class="flex flex-col items-center p-6 pt-12">
+        <p class="text-gray-400 text-xl max-w-7xl w-full mb-12">
+            “All the way from my eyes”
+        </p>
+        
+
+        <!-- Gallery Grid (12 Images Minimum) -->
+        <div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <!-- Ensure data-full-src matches src to load the current image in the lightbox -->
+            <div class="gallery-card"><img src="./assets/20250923_113133.jpg" data-full-src="./assets/20250923_113133.jpg" alt="Advyka Image 1" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/c.jpg" data-full-src="./assets/c.jpg" alt="Advyka Image 2" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_0409 (1).jpg" data-full-src="./assets/IMG_0409 (1).jpg" alt="Advyka Image 3" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_5455 (2).jpg" data-full-src="./assets/IMG_5455 (2).jpg" alt="Advyka Image 4" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_5455(1) (1).jpg" data-full-src="./assets/IMG_5455(1) (1).jpg" alt="Advyka Image 5" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_5516.jpg" data-full-src="./assets/IMG_5516.jpg" alt="Advyka Image 6" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_5521 (1).jpg" data-full-src="./assets/IMG_5521 (1).jpg" alt="Advyka Image 7" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_5742(2) (1).jpg" data-full-src="./assets/IMG_5742(2) (1).jpg" alt="Advyka Image 8" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_5742(1) (2).jpg" data-full-src="./assets/IMG_5742(1) (2).jpg" alt="Advyka Image 9" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_20251013_114007757.jpg" data-full-src="./assets/IMG_20251013_114007757.jpg" alt="Advyka Image 10" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_0419 (1).jpg" data-full-src="./assets/IMG_0419 (1).jpg" alt="Advyka Image 11" class="gallery-image"></div>
+            <div class="gallery-card"><img src="./assets/IMG_0435(2).jpg" data-full-src="./assets/IMG_0435(2).jpg" alt="Advyka Image 12" class="gallery-image"></div>
+            
+        </div>
+        <br>
+        <br>
+
+         <div class="mt-16 text-center max-w-2xl fadeUp" style="animation-delay: 1.0s;">
+            <p class="text-xl text-gray-300 mb-4">
+                Want to see more?
+            </p>
+            <!-- Note: You will need to replace the '#' with your actual contact section link in index.html -->
+            <a href="https://www.instagram.com/framesof.nathh/?hl=en" class="px-8 py-3 soft-btn rounded-full">
+                Get In Touch
+            </a>
+        </div>
+    </main>
+
+    <footer class="text-center text-gray-600 p-4 mt-12">
+        &copy; @framesof.nathh
+    </footer>
+
+    <!-- The Lightbox Modal -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <div id="lightbox-content-container">
+            <!-- Image element to display the full-size image -->
+            <img id="lightbox-content" alt="Enlarged Advyka Image">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryImages = document.querySelectorAll('.gallery-image');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxContent = document.getElementById('lightbox-content');
+
+            // Function to open the lightbox
+            const openLightbox = (imageSrc, altText) => {
+                lightboxContent.src = imageSrc;
+                lightboxContent.alt = altText;
+                lightbox.style.display = 'block';
+                // Add class to body to prevent scrolling beneath the modal
+                document.body.style.overflow = 'hidden';
+            };
+
+            // Function to close the lightbox
+            window.closeLightbox = () => {
+                lightbox.style.display = 'none';
+                lightboxContent.src = '';
+                // Restore body scrolling
+                document.body.style.overflow = 'auto';
+            };
+
+            // Add click listener to each gallery image
+            galleryImages.forEach(img => {
+                img.parentElement.addEventListener('click', (event) => {
+                    // Only open if the image or the card wrapper is clicked
+                    if (event.target.closest('.gallery-card')) {
+                        // Use data-full-src for the highest resolution path
+                        const fullSrc = img.getAttribute('data-full-src') || img.src;
+                        openLightbox(fullSrc, img.alt);
+                    }
+                });
+            });
+
+            // Close lightbox when the user presses the ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape" && lightbox.style.display === 'block') {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

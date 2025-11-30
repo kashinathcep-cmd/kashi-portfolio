@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Projects</title>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+   
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .fadeUp {
+            animation: fadeUp 0.9s ease forwards;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background: rgba(50, 50, 50, 0.5); 
+            border-radius: 14px;
+            border: 1px solid rgba(150, 150, 150, 0.2); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            color: #f3f4f6;
+            transition: all 0.3s ease-in-out; 
+            overflow: hidden; 
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .glass-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+       
+        .soft-btn {
+            background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border: 1px solid #444444; 
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .soft-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen">
+
+   
+    <header class="w-full p-6 flex justify-center sticky top-0 bg-gray-900/90 z-10 backdrop-blur-sm shadow-xl">
+        <div class="max-w-6xl w-full flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-white tracking-wider hover:text-gray-400 transition-colors">
+                KASHINATH
+            </a>
+            <a href="index.html" class="px-6 py-2 soft-btn rounded-full text-sm">
+                ← Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main class="flex flex-col items-center p-6 pt-12">
+        
+        <h1 class="text-5xl md:text-6xl font-light text-white mb-16 tracking-wide fadeUp" style="animation-delay: 0.1s;">
+            Creative Showcase
+        </h1>
+
+   
+        <h2 class="text-4xl font-bold text-white mb-8 self-start max-w-6xl w-full fadeUp" style="animation-delay: 0.2s;">
+            Photography Showcase
+        </h2>
+        <p class="text-gray-400 text-lg max-w-6xl w-full mb-10 fadeUp" style="animation-delay: 0.3s;">
+            Curated selection of my best captures—from moody portraits to vibrant landscapes.
+        </p>
+
+        <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+
+            <div class="glass-card flex flex-col fadeUp" style="animation-delay: 0.4s;">
+                <img src="./assets/IMG_6515.jpg" 
+                     class="project-image rounded-t-xl">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2 text-white">Automotive Photo series</h3>
+                    <p class="text-gray-300 flex-grow mb-4">
+                        Turning automotive power into visual art
+                        <br>
+                    </p>
+                    <a href="automotive.html" class="text-sm text-blue-400 hover:text-blue-300 font-semibold transition-colors mt-auto">View Full Gallery →</a>
+                </div>
+            </div>
+
+           
+            <div class="glass-card flex flex-col fadeUp" style="animation-delay: 0.5s;">
+                <img src="./assets/20250323_233623.jpg" 
+                     alt="Advyka" class="project-image rounded-t-xl">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2 text-white">ADVYKA</h3>
+                    
+                    <p class="text-gray-300 flex-grow mb-4">
+                       Through the Techno-Cultural fest of College  of Engineering Perumon  ADVYKA
+                    </p>
+                    <a href="advyka.html" class="text-sm text-blue-400 hover:text-blue-300 font-semibold transition-colors mt-auto">View Full Gallery →</a>
+                </div>
+            </div>
+            
+            
+            <div class="glass-card flex flex-col fadeUp" style="animation-delay: 0.6s;">
+                <img src="./assets/20250923_113133.jpg" 
+                     alt="Some more" class="project-image rounded-t-xl">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2 text-white">Through my eyes</h3>
+                
+                    <p class="text-gray-300 flex-grow mb-4">
+                        Some more of my works
+                    </p>
+                    <a href="more.html" class="text-sm text-blue-400 hover:text-blue-300 font-semibold transition-colors mt-auto">View Full Gallery →</a>
+                </div>
+            </div>
+
+        </div> 
+
+    <h2 class="text-4xl font-bold text-white mb-8 self-start max-w-6xl w-full fadeUp" style="animation-delay: 0.7s;">
+            Videography & Reels
+        </h2>
+        <p class="text-gray-400 text-lg max-w-6xl w-full mb-10 fadeUp" style="animation-delay: 0.8s;">
+            Short-form video content, cinematic edits, and dynamic storytelling projects.
+        </p>
+
+        <!-- Only one column needed for one project, kept large for emphasis -->
+        <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+
+            <!-- Videography Project 1 (The only card) - TITLE UPDATED -->
+            <div class="glass-card flex flex-col fadeUp" style="animation-delay: 0.9s;">
+                <img src="./assets/cine.jpg.jpg" 
+                     alt="All the way through my eyes" class="project-image rounded-t-xl h-auto">
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="text-xl font-bold mb-2 text-white">My Editing/Videography Works</h3>
+                    <p class="text-gray-300 flex-grow mb-4">
+                        Capturing life the way it feels, not just the way it looks
+                    </p>
+                    <a href="https://www.instagram.com/framesof.nathh/reel/DM-bha_y3pj/?hl=en" class="text-sm text-blue-400 hover:text-blue-300 font-semibold transition-colors mt-auto">Watch My works on Insta →</a>
+                </div>
+            </div>
+
+            <!-- Videography Project 2 has been removed -->
+
+        </div> <!-- End of Videography Grid -->
+
+
+        <!-- Call to Action Footer -->
+        <div class="mt-16 text-center max-w-2xl fadeUp" style="animation-delay: 1.0s;">
+            <p class="text-xl text-gray-300 mb-4">
+                Want to see more?
+            </p>
+            <!-- Note: You will need to replace the '#' with your actual contact section link in index.html -->
+            <a href="https://www.instagram.com/framesof.nathh/?hl=en" class="px-8 py-3 soft-btn rounded-full">
+                Get In Touch
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="text-center text-gray-600 p-4 mt-auto">
+        &copy; 2024 Kashinath. Built with Tailwind CSS.
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Portfolio</title>
+
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Smooth fade + slide animation */
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .fadeUp {
+            animation: fadeUp 0.9s ease forwards;
+        }
+
+        /* Darker Minimal Glassmorphism */
+        .glass-card {
+            backdrop-filter: blur(10px);
+            /* Dark background, slight transparency */
+            background: rgba(50, 50, 50, 0.5); 
+            border-radius: 14px;
+            /* Light, subtle border */
+            border: 1px solid rgba(150, 150, 150, 0.2); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            color: #f3f4f6; /* Ensure text inside is light */
+            font-weight: 500;
+        }
+
+        /* Dark, Minimal Button */
+        .soft-btn {
+            /* Darker gradient */
+            background: linear-gradient(135deg, #2c2c2c, #1f1f1f);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            /* Subtle border to match the dark aesthetic */
+            border: 1px solid #444444; 
+            color: #ffffff; /* White text for contrast */
+            font-weight: 600;
+        }
+        .soft-btn:hover {
+            transform: translateY(-3px) scale(1.02); /* Less aggressive hover */
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+        }
+    </style>
+</head>
+
+<!-- Body uses dark background and light text (matching the minimal banner aesthetic) -->
+<body class="bg-gray-900 text-gray-100 font-sans">
+
+    <section class="min-h-screen flex flex-col items-center p-6">
+
+        <!-- Top row: Name/Title and Profile Image -->
+        <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 items-center pt-16">
+
+            <!-- LEFT SIDE: Name + Subtitle -->
+            <div class="fadeUp" style="animation-delay: 0.1s;">
+                <!-- Large, elegant text for the name -->
+                <h1 class="text-5xl md:text-7xl font-light text-white tracking-wide">
+                    Kashinath S
+                </h1>
+
+                <!-- Subtitle adjusted for dark theme, bolding key interests -->
+                <p class="text-lg md:text-xl text-gray-400 mt-4 max-w-xl font-light">
+                    | Gamer | Tech Enthusiast | Cyber Security Enthusiast |
+                    Videographer | Photographer | Editor |
+                </p>
+            </div>
+
+            <!-- RIGHT SIDE: PROFILE IMAGE -->
+            <div class="flex justify-center md:justify-end fadeUp" style="animation-delay: 0.2s;">
+                <img src="./assets/profile.jpg"
+                     class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white shadow-xl object-cover"
+                     alt="Your photo">
+            </div>
+
+        </div>
+        
+        <hr class="w-full max-w-6xl my-10 border-t border-gray-800/50">
+
+        <!-- ABOUT ME SECTION -->
+        <div class="max-w-4xl text-center fadeUp" style="animation-delay: 0.35s;">
+            <h2 class="text-3xl font-bold text-white mb-6">
+                About Me
+            </h2>
+
+            <!-- Text adjusted for readability on dark background -->
+            <p class="text-gray-400 leading-relaxed text-justify text-lg">
+                I’m an engineering student with a strong passion for **cybersecurity** and **front‑end development**.
+                I enjoy creating clean, user‑friendly interfaces and constantly learning new technologies.
+                <br><br>
+                Beyond tech, I love **videography**, **photography**, and **editing** — where I express creativity.
+                <br><br>
+                I'm always excited to learn, build, and grow — both in technology and creativity.
+            </p>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="mt-20 fadeUp" style="animation-delay: 0.55s;">
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">Skills</h2>
+
+            <!-- Grid of glass cards with dark styling -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="p-5 glass-card text-center rounded-xl hover:scale-[1.03] transition-transform">Photography</div>
+                <div class="p-5 glass-card text-center rounded-xl hover:scale-[1.03] transition-transform">Videography</div>
+                <div class="p-5 glass-card text-center rounded-xl hover:scale-[1.03] transition-transform">Editing</div>
+                <div class="p-5 glass-card text-center rounded-xl hover:scale-[1.03] transition-transform">Gaming</div>
+                <div class="p-5 glass-card text-center rounded-xl hover:scale-[1.03] transition-transform">Little bit Coding</div>
+            </div>
+        </div>
+        
+        <!-- EXPERIENCE & ROLES SECTION -->
+        <div class="mt-20 fadeUp" style="animation-delay: 0.65s;">
+            <h2 class="text-3xl font-bold text-white mb-6 text-center">Experience & Roles</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                
+                <!-- Role 1: Content Creator -->
+                <div class="p-6 glass-card text-left rounded-xl hover:scale-[1.03] transition-transform">
+                    <h3 class="text-xl font-semibold text-white">Content Creator / Media Lead</h3>
+                    <p class="text-gray-400 mt-1">CSI SB College of Engineering perumon</p>
+                    <p class="text-sm text-gray-500 mt-2">Responsible for creating, editing, and managing all visual content for social media and event promotion.</p>
+                </div>
+                
+                <!-- Role 2: Event Photographer -->
+                <div class="p-6 glass-card text-left rounded-xl hover:scale-[1.03] transition-transform">
+                    <h3 class="text-xl font-semibold text-white">Media Co-lead</h3>
+                    <p class="text-gray-400 mt-1">GDG On Campus College of Engineering Perumon</p>
+                    <p class="text-sm text-gray-500 mt-2">As Media Co‑Lead at GDG on Campus CEP, I manage visuals that power community engagement.
+From content strategy to creative execution, I bring ideas to life.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- BUTTON SECTION (Only includes View My Works link) -->
+    <section class="w-full flex justify-center mt-16 pb-12 fadeUp" style="animation-delay: 0.8s;">
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+            <!-- Link to Creative Works -->
+            <a href="projects.html"
+               class="px-10 py-3 soft-btn rounded-full transition-all duration-300">
+                View My works
+            </a>
+        </div>
+    </section>
+    
+    <script>
+        // No JavaScript needed on this page for simplicity.
+    </script>
+
+</body>
+</html>

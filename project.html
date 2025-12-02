@@ -7,6 +7,9 @@
 
     <!-- Load Tailwind CSS from CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <style>
         /* --- STYLES COPIED FROM INDEX.HTML FOR CONSISTENCY --- */
         .reveal {
@@ -51,14 +54,14 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
         }
         .glow-btn {
-            background: linear-gradient(135deg, #002cbe, #3b0bea);
-            box-shadow: 0 0 18px rgba(0, 19, 165, 0.55);
-            color: #fff;
+            background: linear-gradient(135deg, #0070bb, #0024b6);
+            box-shadow: 0 0 18px rgba(17, 0, 174, 0.5);
             transition: 0.35s ease;
+            color: white;
         }
         .glow-btn:hover {
-            box-shadow: 0 0 28px rgba(7, 121, 220, 0.8);
-            transform: scale(1.05);
+            transform: scale(1.06);
+            box-shadow: 0 0 28px rgba(64, 171, 248, 0.8);
         }
         .project-image {
             width: 100%;
@@ -70,24 +73,27 @@
             transform: scale(1.05);
         }
         
-        /* --- POPUP SIDEBAR STYLES --- */
+        /* --- POPUP SIDEBAR STYLES (Adjusted for Left Slide) --- */
         .sidebar {
-            width: 280px; /* Fixed width for the sidebar */
-            min-width: 280px;
-            height: 100vh;
-            position: fixed; 
+            position: fixed;
             top: 0;
-            left: -280px; /* Start hidden off-screen */
+            left: 0; /* Slide in from left */
+            width: 80vw; /* Responsive width */
+            max-width: 320px;
+            height: 100vh;
+            transform: translateX(-100%); /* Start hidden off-screen to the left */
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.5, 1);
+            z-index: 100; 
             padding: 2rem 1.5rem;
-            transition: left 0.3s ease-in-out;
-            z-index: 100; /* High z-index */
-            display: flex;
-            flex-direction: column;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5); /* Shadow on the right edge */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
         .sidebar.active {
-            left: 0; /* Slide into view */
+            transform: translateX(0); /* Slide into view */
         }
+
         #sidebar-overlay {
             position: fixed;
             top: 0;
@@ -98,22 +104,29 @@
             z-index: 90;
             display: none;
             opacity: 0;
+            pointer-events: none;
             transition: opacity 0.3s ease;
         }
         #sidebar-overlay.active {
             display: block;
             opacity: 1;
+            pointer-events: auto;
         }
-        /* New Menu Button Positioning Style */
+        
+        /* Menu Button Styles */
         #menu-toggle-fixed {
             position: fixed;
-            top: 20px; /* Adjusted position */
-            left: 20px; /* Adjusted position */
-            z-index: 45; /* Below sidebar, above content */
+            top: 20px; 
+            left: 20px; 
+            z-index: 110; /* Above sidebar */
             padding: 0.75rem 0.9rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 45px;
+            height: 45px;
+            padding: 8px;
+            transition: opacity 0.3s, visibility 0.3s; /* Added transition for visibility */
         }
         .menu-icon-line {
             display: block;
@@ -130,7 +143,7 @@
 
     <!-- Fixed Menu Toggle Button (Top Left) -->
     <button id="menu-toggle-fixed" onclick="toggleSidebar()" 
-            class="soft-btn glow-btn rounded-lg text-sm">
+            class="soft-btn glow-btn rounded-lg text-sm opacity-100">
         <span class="menu-icon-line"></span>
         <span class="menu-icon-line"></span>
         <span class="menu-icon-line"></span>
@@ -152,16 +165,11 @@
                 &times;
             </button>
 
-            <!-- Back to Home Button -->
-            <a href="index.html" class="px-6 py-2 soft-btn glow-btn rounded-full text-sm self-start">
-                ← Back to Home
-            </a>
-
             <!-- Navigation Links -->
             <nav class="flex flex-col space-y-4 mt-12">
                 <a href="#photography" onclick="closeSidebar()" class="text-xl text-white hover:text-orange-400 transition-colors font-medium">Photography</a>
                 <a href="#videography" onclick="closeSidebar()" class="text-xl text-white hover:text-orange-400 transition-colors font-medium">Videography & Reels</a>
-                <a href="#contact-footer" onclick="closeSidebar()" class="text-xl text-white hover:text-orange-400 transition-colors font-medium">Get in Touch</a>
+                <a href="#contact" onclick="closeSidebar()" class="text-xl text-white hover:text-orange-400 transition-colors font-medium">Get in Touch</a>
             </nav>
         </div>
     </aside>
@@ -172,9 +180,12 @@
     <main class="flex flex-col items-center p-6 lg:p-12 w-full">
         <div class="main-content-wrapper w-full max-w-6xl">
 
-            <!-- Title Header (Removed sticky bar, kept title aligned right) -->
-            <div class="flex justify-end items-center pb-8 pt-6 w-full">
+            <!-- Combined Header: PROJECTS (Left) and Back to Home (Right) -->
+            <div class="flex justify-between items-center pb-8 pt-6 w-full">
                 <h1 class="text-2xl font-bold text-white">PROJECTS</h1>
+                <a href="index.html" class="px-6 py-2 soft-btn glow-btn rounded-full text-sm">
+                    ← Back to Home
+                </a>
             </div>
 
             <!-- Main Page Title - Left Aligned -->
@@ -276,14 +287,31 @@
                 </div>
             </section>
 
-            <div class="mt-16 text-center max-w-2xl reveal" style="transition-delay: 1.2s;">
-                <p class="text-xl text-gray-300 mb-4">
-                    Want to see more?
-                </p>
-                <a href="https://www.instagram.com/framesof.nathh/?hl=en" target="_blank" class="px-8 py-3 soft-btn glow-btn rounded-full">
-                    Get In Touch
-                </a>
+            <!-- ============================================== -->
+            <!-- CONTACT SECTION -->
+            <!-- ============================================== -->
+            <div id="contact" class="max-w-6xl w-full mt-20 reveal" style="transition-delay: 0.55s;">
+                <hr class="w-screen border-t-4 border-gray-600 my-12 -ml-[50vw] relative left-1/2">
+                <h2 class="text-3xl font-bold text-center mb-8">Get in Touch</h2>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="https://www.instagram.com/framesof.nathh" target="_blank" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
+                        <i class="fab fa-instagram text-pink-500 text-xl"></i> @framesof.nathh
+                    </a>
+                    <a href="https://www.instagram.com/kashiiiiii.i" target="_blank" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
+                        <i class="fab fa-instagram text-pink-500 text-xl"></i> @kashiiiiii.i
+                    </a>
+                    <a href="https://www.linkedin.com/in/kashi-nath-9a6563331/" target="_blank" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
+                        <i class="fab fa-linkedin text-blue-500 text-xl"></i> LinkedIn
+                    </a>
+                    <a href="mailto:nath33459@gmail.com" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
+                        <i class="fas fa-envelope text-red-500 text-xl"></i> Gmail
+                    </a>
+                    <a href="https://github.com/kashinathcep-cmd" target="_blank" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
+                        <i class="fab fa-github text-white text-xl"></i> GitHub 
+                    </a>
+                </div>
             </div>
+
 
         </div> <!-- End of main-content-wrapper -->
     </main>
@@ -293,46 +321,111 @@
         &copy; 2025 KASHINATH | Creative Showcase
     </footer>
 
-    <!-- SCROLL REVEAL JAVASCRIPT -->
+    <!-- SCROLL VISIBILITY & SIDEBAR SCRIPT -->
     <script>
-        // --- Sidebar Logic ---
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
-        const body = document.body;
+        const menuButton = document.getElementById('menu-toggle-fixed');
+        const scrollThreshold = 100;
+        let lastScrollTop = 0;
+        let scrollTimeout; // New variable for the debounce timer
 
+        // Function to run when scrolling stops
+        function handleScrollStop() {
+            // Only show the button if the sidebar is closed
+            if (!sidebar.classList.contains('active')) {
+                // Show button: remove hiding classes
+                menuButton.classList.remove('opacity-0', 'invisible');
+                menuButton.classList.add('opacity-100');
+            }
+        }
+
+        // Function to handle showing/hiding on scroll movement
+        function handleScroll() {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            
+            // Clear the previous timeout immediately on scroll movement
+            clearTimeout(scrollTimeout);
+
+            // Do nothing if the sidebar is open
+            if (sidebar.classList.contains('active')) {
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                return;
+            }
+
+            // 1. Hide immediately if scrolling down or up past the threshold
+            if (scrollTop > scrollThreshold) {
+                // Hides by setting opacity to 0 and invisibility
+                menuButton.classList.add('opacity-0', 'invisible');
+            }
+            
+            // 2. Set a new timeout to show the button if scrolling stops
+            // The button is shown regardless of scroll direction once the user pauses.
+            scrollTimeout = setTimeout(handleScrollStop, 200); // Wait 200ms
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+
+        // Toggle sidebar function
         window.toggleSidebar = () => {
+            const isOpening = !sidebar.classList.contains('active');
+
+            if (isOpening) {
+                clearTimeout(scrollTimeout); // Clear timeout when opening menu
+                // Opening: Hide button completely
+                menuButton.classList.add('opacity-0', 'invisible');
+            } else {
+                // Closing: Show button, respecting scroll stop logic
+                menuButton.classList.remove('opacity-0', 'invisible');
+                handleScroll(); // Re-run scroll check immediately, which starts the timer
+            }
+
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
             // Prevent scrolling when sidebar is open
-            body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
+            document.body.classList.toggle('overflow-hidden'); 
         };
 
+        // Close sidebar function
         window.closeSidebar = () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            body.style.overflow = 'auto';
+            
+            // Only run logic if the sidebar is currently open
+            if (sidebar.classList.contains('active')) {
+                // Show button, respecting scroll stop logic
+                menuButton.classList.remove('opacity-0', 'invisible');
+                handleScroll(); // Re-run scroll check immediately
+
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('overflow-hidden');
+            }
         };
 
+        // Add event listener for keyboard closing (Escape key)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                closeSidebar();
+            }
+        });
 
-        // --- Scroll Reveal Logic ---
+        // --- Setup and Scroll Reveal Logic ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Setup scroll listener for the menu button visibility
+            window.addEventListener('scroll', handleScroll);
+            
+            // --- Scroll Reveal for Content ---
             const revealElements = document.querySelectorAll(".reveal");
-
-            const observer = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("active");
-                        // Stop observing once it's revealed
-                        observer.unobserve(entry.target); 
+                        observer.unobserve(entry.target);
                     }
                 });
             }, {
                 threshold: 0.1 // Trigger when 10% of the element is visible
             });
-
-            revealElements.forEach(element => {
-                observer.observe(element);
-            });
+            revealElements.forEach(el => observer.observe(el));
             
             // Immediately activate elements in the initial viewport
             document.querySelectorAll('.reveal').forEach(el => {
@@ -340,6 +433,9 @@
                     el.classList.add('active');
                 }
             });
+            
+            // Initial check for menu button visibility after content loads
+            handleScroll(); 
         });
     </script>
 </body>

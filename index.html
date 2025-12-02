@@ -21,9 +21,15 @@
         }
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0px);
         }
-
+        .navbar {
+            backdrop-filter: blur(16px);
+            background: rgba(15, 15, 15, 0.45);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1rem 1rem;
+            z-index: 50;
+        }
         /* Glass Cards */
         .glass-card {
             backdrop-filter: blur(12px);
@@ -63,35 +69,125 @@
             box-shadow: 0 0 28px rgba(64, 171, 248, 0.8);
         }
 
-        /* Sidebar slide + main shift */
-        #mainContent {
-            transition: margin-left 0.3s ease;
+        /* 1. Sidebar Base Styles (Left-slide, Responsive) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0; 
+            width: 80vw; 
+            max-width: 320px; 
+            height: 100vh;
+            transform: translateX(-100%); 
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.5, 1);
+            z-index: 50; 
+            padding: 2rem;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1); 
         }
+
+        /* 2. Sidebar Open State */
+        .sidebar.open {
+            transform: translateX(0); 
+        }
+
+        /* 3. Overlay Styles */
+        #sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 40; 
+            opacity: 0;
+            pointer-events: none; 
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #sidebar-overlay.open {
+            opacity: 1;
+            pointer-events: auto; 
+        }
+
+        /* 4. Fixed Menu Button */
+      #menu-toggle-fixed {
+            position: fixed;
+            top: 20px; 
+            left: 20px; 
+            z-index: 110; /* Above sidebar */
+            padding: 0.75rem 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            padding: 8px;
+            transition: opacity 0.3s, visibility 0.3s; /* Added transition for visibility */
+        }
+
+        /* 5. Hamburger Icon Lines */
+        .menu-icon-line {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: white;
+            margin: 3px 0;
+            transition: background-color 0.3s;
+        }
+        
+        /* 6. SCROLL HIDE/SHOW EFFECT CLASS (New) */
+        #menu-toggle-fixed.hidden-scroll {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
     </style>
 </head>
 
 <body class="bg-gray-900 text-gray-100" align="left-0">
-
-<!-- MENU BUTTON -->
-<button id="menuBtn"
-    class="fixed top-5 left-5 z-50 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg">
-    ☰
-</button>
-
-<!-- SIDEBAR -->
-<header id="sidebar"
-    class="fixed top-0 left-0 w-64 min-h-screen bg-black shadow-xl p-6 transform -translate-x-full transition-all duration-300 z-40">
+      
+    <!-- FIXED MENU BUTTON (Top Left) -->
+    <!-- The class 'hidden-scroll' will be toggled by JS on scroll -->
+    <button id="menu-toggle-fixed" onclick="toggleSidebar()" 
+            class="soft-btn glow-btn rounded-lg text-sm transition-opacity duration-300">
+        <span class="menu-icon-line"></span>
+        <span class="menu-icon-line"></span>
+        <span class="menu-icon-line"></span>
+    </button>
     
-    <h1 class="text-3xl font-bold">Kashi Nath</h1>
-    <p class="mt-2 text-gray-500"></p>
+    <!-- Sidebar Overlay - Click to close menu -->
+    <div id="sidebar-overlay" onclick="closeSidebar()"></div>
 
-    <nav class="mt-11 flex flex-col gap-4 text-lg">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="project.html">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+    <!-- ============================================== -->
+    <!-- POPUP SIDEBAR -->
+    <!-- ============================================== -->
+    <aside id="sidebar" class="sidebar bg-gray-900/90">
+        <div class="flex flex-col space-y-8 h-full">
+            
+            <h1 class="text-3xl font-extrabold text-white tracking-widest pt-4">KASHINATH</h1>
+            
+            <!-- Close Button (X icon) -->
+            <button onclick="closeSidebar()" class="absolute top-4 right-4 text-gray-300 hover:text-orange-400 transition-colors text-3xl font-light leading-none">
+                &times;
+            </button>
+            
+            <!-- Navigation Links -->
+            <nav class="flex flex-col space-y-4 mt-12">
+                <!-- Links here were originally missing fragment IDs, adding placeholders -->
+                <a href="#about" onclick="closeSidebar()" class="text-xl text-white hover:text-orange-400 transition-colors font-medium p-2 rounded-md hover:bg-gray-800/50">About Me</a>
+                <a href="#experience" onclick="closeSidebar()" class="text-xl text-white hover:text-orange-400 transition-colors font-medium p-2 rounded-md hover:bg-gray-800/50">Experience & Roles</a>
+                <a href="#contact" onclick="closeSidebar()" class="text-xl text-white hover:text-orange-400 transition-colors font-medium p-2 rounded-md hover:bg-gray-800/50">Get in Touch</a>
+            </nav>
+            
+            <!-- Footer Content (Optional) -->
+            <div class="mt-auto text-sm text-gray-500 border-t border-gray-700 pt-4">
+                <p>&copy; 2025 Kashinath. All rights reserved.</p>
+            </div>
+        </div>
+    </aside>
+
 
 <!-- MAIN CONTENT WRAPPER -->
 <div id="mainContent" class="transition-all">
@@ -192,76 +288,76 @@
                         
                         <!-- repeat format -->
                         <div class="flex items-center gap-3">
-                            <img src="./assets/b.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/b.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=TLOU'">
                             <span>The Last of Us 1/2</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/d.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/d.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=TR'">
                             <span>Tomb Raider Series</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/e.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/e.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=GoT'">
                             <span>Ghost of Tsushima</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/f.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/f.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=SM1'">
                             <span>Spider-Man 1</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/h.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/h.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=SMM'">
                             <span>Spider-Man Miles Morales</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/g.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/g.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=DBH'">
                             <span>Detroit: Become Human</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/k.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/k.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=WWM'">
                             <span>Where Winds Meet</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/l.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/l.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=FH'">
                             <span>Forza Horizon 4/5</span>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <img src="./assets/m.jpg" class="w-8 h-8 rounded-md">
+                            <img src="./assets/m.jpg" class="w-8 h-8 rounded-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/1f2937/ffffff?text=V'">
                             <span>Valorant</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- BUTTON -->
-                <!-- BUTTON -->
-<div class="flex lg:items-center items-center justify-center lg:justify-end text-right">
-    <div class="flex flex-col items-end">
-        <p class="text-lg font-semibold mb-4">Take a look at my works</p>
+                <div class="flex lg:items-center items-center justify-center lg:justify-end text-right">
+                    <div class="flex flex-col items-end">
+                        <p class="text-lg font-semibold mb-4">Take a look at my works</p>
 
-        <a href="project.html" class="px-10 py-3 glow-btn rounded-full">
-            View My Works →
-        </a>
-    </div>
-</div>
-
-
+                        <!-- Note: 'project.html' is an external link and won't be runnable in this single-file environment. -->
+                        <a href="project.html" class="px-10 py-3 glow-btn rounded-full">
+                            View My Works →
+                        </a>
+                    </div>
+                </div>
 
 
             </div>
         </div>
 
+        <!-- HR separator moved out of max-w-6xl container to match the first HR's full width. -->
+        <hr class="w-full border-t-4 border-gray-600 my-12 reveal" style="transition-delay: 0.5s;">
+
+
         <!-- CONTACT -->
-        <div id="contact" class="max-w-6xl w-full mt-20 reveal" style="transition-delay: 0.55s;">
-            <hr class="w-screen border-t-4 border-gray-600 my-12 -ml-[50vw] relative left-1/2">
-
-
-
+        <!-- Removed mt-20 since the spacing is now handled by the HR's margin-top and margin-bottom (my-12). -->
+        <div id="contact" class="max-w-6xl w-full reveal" style="transition-delay: 0.55s;">
+            
 
             <h2 class="text-3xl font-bold text-center mb-8">Get in Touch</h2>
 
@@ -278,11 +374,10 @@
                 <a href="mailto:nath33459@gmail.com" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
                     <i class="fas fa-envelope text-red-500 text-xl"></i> Gmail
                 </a>
-                <a href="https://github.com/kashinath012006" target="_blank" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
+                <a href="https://github.com/kashinathcep-cmd" target="_blank" class="soft-btn glow-btn px-6 py-3 rounded-full flex items-center gap-3">
                 <i class="fab fa-github text-white text-xl"></i> GitHub 
                 </a>
 
-                </a>
             </div>
         </div>
 
@@ -290,41 +385,103 @@
 
     <!-- FOOTER -->
     <footer class="text-center text-gray-500 py-6 mt-20 border-t border-gray-800/70">
-        &copy; 2025 Kashinath Portfolio. All Rights Reserved.
+        &copy; Kashinath Portfolio. All Rights Reserved.
     </footer>
 
 </div>
 
 <!-- SIDEBAR SCRIPT -->
 <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const sidebar = document.getElementById("sidebar");
-    const main = document.getElementById("mainContent");
+    // Define SCROLL_THRESHOLD globally or locally in functions that need it
+    const SCROLL_THRESHOLD = 50; 
+    const menuButton = document.getElementById('menu-toggle-fixed');
+    const sidebar = document.getElementById('sidebar');
+    let scrollTimeout; 
 
-    function closeSidebar() {
-        sidebar.classList.add("-translate-x-full");
-        main.style.marginLeft = "0";
+    // --- SIDEBAR TOGGLE LOGIC ---
+    function toggleSidebar() {
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        const isOpening = !sidebar.classList.contains('open');
+
+        if (isOpening) {
+            // Opening: Hide the button immediately
+            menuButton.classList.add('opacity-0');
+            menuButton.classList.add('hidden-scroll'); 
+            setTimeout(() => { menuButton.classList.add('hidden'); }, 300); 
+        } else {
+            // Closing: Show and fade in the button (remove sidebar-open classes)
+            menuButton.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                 // After closing, apply the correct scroll state immediately
+                if (window.pageYOffset <= SCROLL_THRESHOLD) {
+                    menuButton.classList.remove('hidden-scroll');
+                    menuButton.classList.remove('opacity-0');
+                } else {
+                    
+                    menuButton.classList.add('hidden-scroll');
+                    menuButton.classList.add('opacity-0');
+                }
+            });
+        }
+        
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+        document.body.classList.toggle('overflow-hidden'); 
     }
 
-    // Toggle sidebar
-    menuBtn.addEventListener("click", () => {
-        if (sidebar.classList.contains("-translate-x-full")) {
-            sidebar.classList.remove("-translate-x-full");
-            main.style.marginLeft = "16rem";
-        } else {
+    function closeSidebar() {
+        const overlay = document.getElementById('sidebar-overlay');
+
+       
+        if (sidebar.classList.contains('open')) {
+            
+            menuButton.classList.remove('hidden');
+            requestAnimationFrame(() => {
+            
+                if (window.pageYOffset <= SCROLL_THRESHOLD) {
+                    menuButton.classList.remove('hidden-scroll');
+                    menuButton.classList.remove('opacity-0');
+                } else {
+                    menuButton.classList.add('hidden-scroll');
+                    menuButton.classList.add('opacity-0');
+                }
+            });
+            
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.classList.remove('overflow-hidden');
+        }
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
             closeSidebar();
         }
     });
 
-    // Close sidebar when clicking outside
-    main.addEventListener("click", () => {
-        if (!sidebar.classList.contains("-translate-x-full")) {
-            closeSidebar();
+    function handleScrollStop() {
+        if (!sidebar.classList.contains('open')) {
+            if (window.pageYOffset > SCROLL_THRESHOLD) {
+                menuButton.classList.remove('hidden-scroll');
+            }
+        }
+    }
+    function handleScrollStart() {
+        if (!sidebar.classList.contains('open')) {
+            if (window.pageYOffset > SCROLL_THRESHOLD) {
+                 menuButton.classList.add('hidden-scroll');
+            }
+        }
+    }
+        window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout); 
+        handleScrollStart(); 
+        scrollTimeout = setTimeout(handleScrollStop, 150);
+        if (window.pageYOffset <= SCROLL_THRESHOLD) {
+             menuButton.classList.remove('hidden-scroll');
         }
     });
 </script>
-
-<!-- SCROLL REVEAL -->
 <script>
     const elements = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(entries => {
@@ -337,6 +494,5 @@
     });
     elements.forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
